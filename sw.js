@@ -1,4 +1,4 @@
-const CACHE_NAME = 'trening-cache-v7';
+const CACHE_NAME = 'trening-cache-v10';
 const urlsToCache = [
   './',
   './index.html',

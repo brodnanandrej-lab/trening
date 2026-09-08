@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Môj Tréningový Plán s Rýchlym Preklikom</title>
+    <title>Môj Tréningový Plán</title>
     <style>
         :root {
             --color-day1: #3498db;
@@ -22,7 +22,6 @@
             color: #ffffff;
             margin-top: 10px;
         }
-        /* BANNER PRE ODPOPORÚČANÝ TRÉNING */
         .next-workout-banner {
             background-color: #1abc9c;
             color: #121212;
@@ -36,12 +35,9 @@
             cursor: pointer;
             transition: transform 0.1s;
         }
-        .next-workout-banner:active {
-            transform: scale(0.98);
-        }
+        .next-workout-banner:active { transform: scale(0.98); }
         .next-workout-banner strong { font-size: 1.2em; }
 
-        /* RÝCHLE PREKLIKOVÉ TLAČIDLÁ */
         .quick-nav {
             display: flex;
             gap: 8px;
@@ -58,14 +54,11 @@
             cursor: pointer;
             text-align: center;
             box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-            transition: opacity 0.2s;
         }
-        .quick-nav-btn:active { opacity: 0.8; }
         .nav-day1 { background-color: var(--color-day1); }
         .nav-day2 { background-color: var(--color-day2); }
         .nav-day3 { background-color: var(--color-day3); color: #121212; }
 
-        /* KALENDÁR STYLES */
         .calendar-card {
             background-color: #1e1e1e;
             border-radius: 10px;
@@ -80,10 +73,7 @@
             align-items: center;
             margin-bottom: 15px;
         }
-        .calendar-header h3 {
-            margin: 0;
-            color: #ffffff;
-        }
+        .calendar-header h3 { margin: 0; color: #ffffff; }
         .calendar-header button {
             background: #2c2c2c;
             color: #fff;
@@ -98,12 +88,7 @@
             gap: 5px;
             text-align: center;
         }
-        .day-name {
-            font-size: 0.8em;
-            color: #888;
-            font-weight: bold;
-            padding-bottom: 5px;
-        }
+        .day-name { font-size: 0.8em; color: #888; font-weight: bold; padding-bottom: 5px; }
         .cal-day {
             aspect-ratio: 1;
             display: flex;
@@ -114,11 +99,9 @@
             font-size: 0.85em;
             font-weight: bold;
             color: #ccc;
-            position: relative;
         }
         .cal-day.empty { background: transparent; }
         .cal-day.today { border: 2px solid #ffffff; }
-        
         .cal-day.day-1 { background-color: var(--color-day1); color: #fff; cursor: pointer; }
         .cal-day.day-2 { background-color: var(--color-day2); color: #fff; cursor: pointer; }
         .cal-day.day-3 { background-color: var(--color-day3); color: #121212; cursor: pointer; }
@@ -131,19 +114,9 @@
             flex-wrap: wrap;
             gap: 8px;
         }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-        }
-        .legend-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 3px;
-        }
+        .legend-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .legend-color { width: 12px; height: 12px; border-radius: 3px; }
 
-        /* DNI FARBY SEKCIÍ */
         #dayContainer1 { border-top: 5px solid var(--color-day1); }
         #dayContainer1 .part-title, #dayContainer1 .exercise-card { border-left-color: var(--color-day1); }
         #dayContainer1 .day-title span { color: var(--color-day1); }
@@ -162,8 +135,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             padding: 20px;
             margin-bottom: 40px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            scroll-margin-top: 15px; /* Plynulé odsadzenie pri prekliku */
+            scroll-margin-top: 15px;
         }
         .day-container.active-day {
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
@@ -178,8 +150,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
         }
         .active-badge {
             background-color: #ffffff;
@@ -189,12 +159,8 @@
             padding: 4px 10px;
             border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
-        .part-title {
-            margin-top: 30px;
-            font-size: 1.3em;
-        }
+        .part-title { margin-top: 30px; font-size: 1.3em; }
         .exercise-card {
             background-color: #2c2c2c;
             border: 1px solid #444;
@@ -204,11 +170,7 @@
             margin-bottom: 20px;
             overflow-x: auto;
         }
-        .exercise-title {
-            margin-top: 0;
-            color: #ffffff;
-            font-size: 1.1em;
-        }
+        .exercise-title { margin-top: 0; color: #ffffff; font-size: 1.1em; }
         table {
             width: 100%;
             min-width: 320px;
@@ -222,11 +184,7 @@
             text-align: center;
             vertical-align: middle;
         }
-        th {
-            background-color: #333;
-            color: #e0e0e0;
-            line-height: 1.2;
-        }
+        th { background-color: #333; color: #e0e0e0; }
         input[type="number"] {
             width: 45px;
             padding: 6px;
@@ -237,16 +195,8 @@
             color: #ffffff;
             background-color: #444;
         }
-        input[type="number"]:focus {
-            outline: none;
-            border-color: #1abc9c;
-            background-color: #555;
-        }
-        .history-col {
-            background-color: #222;
-            color: #888;
-            font-size: 0.9em;
-        }
+        input[type="number"]:focus { outline: none; border-color: #1abc9c; background-color: #555; }
+        .history-col { background-color: #222; color: #888; }
         .current-col { background-color: #2a3b38; }
         .upload-section {
             margin-bottom: 15px;
@@ -256,19 +206,13 @@
             font-size: 0.9em;
             color: #aaa;
         }
-        .upload-section input[type="file"] {
-            margin-bottom: 5px;
-            margin-top: 5px;
-            color: #e0e0e0;
-            width: 100%;
-        }
+        .upload-section input[type="file"] { margin-top: 5px; color: #e0e0e0; width: 100%; }
         .preview-img {
             display: none;
             max-width: 100%;
             height: auto;
             max-height: 250px;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
             margin-top: 10px;
             border: 1px solid #444;
             object-fit: contain;
@@ -282,18 +226,12 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.85em;
         }
-        .btn-delete-img:hover { background-color: #e74c3c; }
-        .abs-section {
-            background-color: #22302d;
-            border-left-color: #2ecc71 !important;
-        }
+        .abs-section { background-color: #22302d; border-left-color: #2ecc71 !important; }
         .btn-finish {
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: #27ae60;
             color: white;
             text-align: center;
             font-size: 1.1em;
@@ -302,23 +240,15 @@
             border-radius: 8px;
             margin-top: 30px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: background 0.2s;
         }
-        .btn-finish:hover { background-color: #2ecc71; }
     </style>
-
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1abc9c">
     <link rel="apple-touch-icon" href="icon-192.png">
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js').then(registration => {
-            console.log('ServiceWorker registered');
-          }).catch(err => {
-            console.log('ServiceWorker failed: ', err);
-          });
+          navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
         });
       }
     </script>
@@ -327,24 +257,21 @@
 
     <h1>Môj Tréningový Plán</h1>
 
-    <!-- DYNAMICKÝ BANNER -->
     <div class="next-workout-banner" id="nextWorkoutBanner" onclick="scrollToRecommendedDay()">
         🎯 <strong>Dnes na rade:</strong> <span id="recommendedDayText">Deň 1: Prsia, Triceps a Brucho</span><br>
         <small id="lastCompletedText">Klikni sem pre prechod na tréning 👇</small>
     </div>
 
-    <!-- RÝCHLE PREKLIKOVÉ TLAČIDLÁ -->
     <div class="quick-nav">
         <button class="quick-nav-btn nav-day1" onclick="scrollToDay(1)">Deň 1<br>(Prsia)</button>
         <button class="quick-nav-btn nav-day2" onclick="scrollToDay(2)">Deň 2<br>(Chrbát)</button>
         <button class="quick-nav-btn nav-day3" onclick="scrollToDay(3)">Deň 3<br>(Ramená)</button>
     </div>
 
-    <!-- TRÉNINGOVÝ KALENDÁR -->
     <div class="calendar-card">
         <div class="calendar-header">
             <button onclick="changeMonth(-1)">◀</button>
-            <h3 id="calMonthTitle">September 2026</h3>
+            <h3 id="calMonthTitle">Tréningový Kalendár</h3>
             <button onclick="changeMonth(1)">▶</button>
         </div>
         <div class="calendar-grid" id="calendarGrid"></div>
@@ -357,20 +284,13 @@
 
     <!-- DEŇ 1 -->
     <div class="day-container" id="dayContainer1">
-        <h2 class="day-title">
-            <span>Deň 1: Prsia, Triceps a Brucho</span>
-        </h2>
+        <h2 class="day-title"><span>Deň 1: Prsia, Triceps a Brucho</span></h2>
         
         <h3 class="part-title">Rozcvička a Hrazda</h3>
         <div class="exercise-card">
             <h4 class="exercise-title">Kĺbová rozcvička + Zhyby na hrazde (3 série)</h4>
             <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule</th>
-                    <th class="history-col">Minule</th>
-                    <th class="current-col">Dnes (Opak.)</th>
-                </tr>
+                <tr><th>Séria</th><th class="history-col">Predminule</th><th class="history-col">Minule</th><th class="current-col">Dnes (Opak.)</th></tr>
                 <tr class="exercise-row has-only-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-reps"></td></tr>
                 <tr class="exercise-row has-only-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-reps"></td></tr>
                 <tr class="exercise-row has-only-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-reps"></td></tr>
@@ -378,148 +298,66 @@
         </div>
         
         <h3 class="part-title">Prsia (3 cviky)</h3>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 1 (Prsia)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 2 (Prsia)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 3 (Prsia)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
+        <script>
+            for(let i=1; i<=3; i++) {
+                document.write(`
+                <div class="exercise-card">
+                    <h4 class="exercise-title">Cvik ${i} (Prsia)</h4>
+                    <div class="upload-section">
+                        <label>Nahrať fotku cviku:</label><br>
+                        <input type="file" accept="image/*" onchange="handleImageUpload(this)">
+                        <br><img class="preview-img" src="" alt="Náhľad cviku">
+                        <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
+                    </div>
+                    <table>
+                        <tr><th>Séria</th><th class="history-col">Predminule</th><th class="history-col">Minule</th><th class="current-col">Dnes (Váha)</th><th class="current-col">Dnes (Opak.)</th></tr>
+                        <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                    </table>
+                </div>`);
+            }
+        </script>
+
         <h3 class="part-title">Triceps (2 cviky)</h3>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 1 (Triceps)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 2 (Triceps)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
+        <script>
+            for(let i=1; i<=2; i++) {
+                document.write(`
+                <div class="exercise-card">
+                    <h4 class="exercise-title">Cvik ${i} (Triceps)</h4>
+                    <div class="upload-section">
+                        <label>Nahrať fotku cviku:</label><br>
+                        <input type="file" accept="image/*" onchange="handleImageUpload(this)">
+                        <br><img class="preview-img" src="" alt="Náhľad cviku">
+                        <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
+                    </div>
+                    <table>
+                        <tr><th>Séria</th><th class="history-col">Predminule</th><th class="history-col">Minule</th><th class="current-col">Dnes (Váha)</th><th class="current-col">Dnes (Opak.)</th></tr>
+                        <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                    </table>
+                </div>`);
+            }
+        </script>
+
         <h3 class="part-title">Brucho</h3>
         <div class="exercise-card abs-section">
             <h4 class="exercise-title">Tréning brucha (Vlastné cviky)</h4>
-            <p>Odporúča sa odcvičiť 2-3 cviky na brucho (napr. skracovačky, plank, dvíhanie nôh).<br><em>Tento úsek je bez nutnosti nahrávať fotku a zapisovať do tabuľky.</em></p>
+            <p>Odporúča sa odcvičiť 2-3 cviky na brucho (napr. skracovačky, plank, dvíhanie nôh).</p>
         </div>
         <button class="btn-finish" onclick="finishDay(this)" style="background:var(--color-day1)">✅ Ukončiť Deň 1 a uložiť históriu</button>
     </div>
 
     <!-- DEŇ 2 -->
     <div class="day-container" id="dayContainer2">
-        <h2 class="day-title">
-            <span>Deň 2: Chrbát, Biceps a Brucho</span>
-        </h2>
+        <h2 class="day-title"><span>Deň 2: Chrbát, Biceps a Brucho</span></h2>
         
         <h3 class="part-title">Rozcvička a Hrazda</h3>
         <div class="exercise-card">
             <h4 class="exercise-title">Kĺbová rozcvička + Zhyby na hrazde (3 série)</h4>
             <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule</th>
-                    <th class="history-col">Minule</th>
-                    <th class="current-col">Dnes (Opak.)</th>
-                </tr>
+                <tr><th>Séria</th><th class="history-col">Predminule</th><th class="history-col">Minule</th><th class="current-col">Dnes (Opak.)</th></tr>
                 <tr class="exercise-row has-only-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-reps"></td></tr>
                 <tr class="exercise-row has-only-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-reps"></td></tr>
                 <tr class="exercise-row has-only-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-reps"></td></tr>
@@ -527,148 +365,66 @@
         </div>
         
         <h3 class="part-title">Chrbát (3 cviky)</h3>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 1 (Chrbát)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 2 (Chrbát)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 3 (Chrbát)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
+        <script>
+            for(let i=1; i<=3; i++) {
+                document.write(`
+                <div class="exercise-card">
+                    <h4 class="exercise-title">Cvik ${i} (Chrbát)</h4>
+                    <div class="upload-section">
+                        <label>Nahrať fotku cviku:</label><br>
+                        <input type="file" accept="image/*" onchange="handleImageUpload(this)">
+                        <br><img class="preview-img" src="" alt="Náhľad cviku">
+                        <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
+                    </div>
+                    <table>
+                        <tr><th>Séria</th><th class="history-col">Predminule</th><th class="history-col">Minule</th><th class="current-col">Dnes (Váha)</th><th class="current-col">Dnes (Opak.)</th></tr>
+                        <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                    </table>
+                </div>`);
+            }
+        </script>
+
         <h3 class="part-title">Biceps (2 cviky)</h3>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 1 (Biceps)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 2 (Biceps)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
+        <script>
+            for(let i=1; i<=2; i++) {
+                document.write(`
+                <div class="exercise-card">
+                    <h4 class="exercise-title">Cvik ${i} (Biceps)</h4>
+                    <div class="upload-section">
+                        <label>Nahrať fotku cviku:</label><br>
+                        <input type="file" accept="image/*" onchange="handleImageUpload(this)">
+                        <br><img class="preview-img" src="" alt="Náhľad cviku">
+                        <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
+                    </div>
+                    <table>
+                        <tr><th>Séria</th><th class="history-col">Predminule</th><th class="history-col">Minule</th><th class="current-col">Dnes (Váha)</th><th class="current-col">Dnes (Opak.)</th></tr>
+                        <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                    </table>
+                </div>`);
+            }
+        </script>
+
         <h3 class="part-title">Brucho</h3>
         <div class="exercise-card abs-section">
             <h4 class="exercise-title">Tréning brucha (Vlastné cviky)</h4>
-            <p>Odporúča sa odcvičiť 2-3 cviky na brucho (napr. skracovačky, plank, dvíhanie nôh).<br><em>Tento úsek je bez nutnosti nahrávať fotku a zapisovať do tabuľky.</em></p>
+            <p>Odporúča sa odcvičiť 2-3 cviky na brucho (napr. skracovačky, plank, dvíhanie nôh).</p>
         </div>
         <button class="btn-finish" onclick="finishDay(this)" style="background:var(--color-day2)">✅ Ukončiť Deň 2 a uložiť históriu</button>
     </div>
 
     <!-- DEŇ 3 -->
     <div class="day-container" id="dayContainer3">
-        <h2 class="day-title">
-            <span>Deň 3: Ramená a Brucho</span>
-        </h2>
+        <h2 class="day-title"><span>Deň 3: Ramená a Brucho</span></h2>
         
         <h3 class="part-title">Rozcvička a Hrazda</h3>
         <div class="exercise-card">
             <h4 class="exercise-title">Kĺbová rozcvička + Zhyby na hrazde (3 série)</h4>
             <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule</th>
-                    <th class="history-col">Minule</th>
-                    <th class="current-col">Dnes (Opak.)</th>
-                </tr>
+                <tr><th>Séria</th><th class="history-col">Predminule</th><th class="history-col">Minule</th><th class="current-col">Dnes (Opak.)</th></tr>
                 <tr class="exercise-row has-only-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-reps"></td></tr>
                 <tr class="exercise-row has-only-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-reps"></td></tr>
                 <tr class="exercise-row has-only-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-reps"></td></tr>
@@ -676,80 +432,31 @@
         </div>
         
         <h3 class="part-title">Ramená (3 cviky)</h3>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 1 (Ramená)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak me</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 2 (Ramená)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
-        <div class="exercise-card">
-            <h4 class="exercise-title">Cvik 3 (Ramená)</h4>
-            <div class="upload-section">
-                <label>Nahrať fotku cviku:</label><br>
-                <input type="file" accept="image/*" onchange="handleImageUpload(this)">
-                <br>
-                <img class="preview-img" src="" alt="Náhľad cviku">
-                <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Séria</th>
-                    <th class="history-col">Predminule<br><small>(Váha / Opak.)</small></th>
-                    <th class="history-col">Minule<br><small>(Váha / Opak.)</small></th>
-                    <th class="current-col">Dnes<br><small>Váha</small></th>
-                    <th class="current-col">Dnes<br><small>Opak.</small></th>
-                </tr>
-                <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-                <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
-            </table>
-        </div>
-        
+        <script>
+            for(let i=1; i<=3; i++) {
+                document.write(`
+                <div class="exercise-card">
+                    <h4 class="exercise-title">Cvik ${i} (Ramená)</h4>
+                    <div class="upload-section">
+                        <label>Nahrať fotku cviku:</label><br>
+                        <input type="file" accept="image/*" onchange="handleImageUpload(this)">
+                        <br><img class="preview-img" src="" alt="Náhľad cviku">
+                        <button type="button" class="btn-delete-img" onclick="deleteImage(this)">Odstrániť fotku</button>
+                    </div>
+                    <table>
+                        <tr><th>Séria</th><th class="history-col">Predminule</th><th class="history-col">Minule</th><th class="current-col">Dnes (Váha)</th><th class="current-col">Dnes (Opak.)</th></tr>
+                        <tr class="exercise-row has-weight-reps"><td>1.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>2.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                        <tr class="exercise-row has-weight-reps"><td>3.</td><td class="history-2 history-col">-</td><td class="history-1 history-col">-</td><td class="current-col"><input type="number" class="val-weight"></td><td class="current-col"><input type="number" class="val-reps"></td></tr>
+                    </table>
+                </div>`);
+            }
+        </script>
+
         <h3 class="part-title">Brucho</h3>
         <div class="exercise-card abs-section">
             <h4 class="exercise-title">Tréning brucha (Vlastné cviky)</h4>
-            <p>Odporúča sa odcvičiť 2-3 cviky na brucho (napr. skracovačky, plank, dvíhanie nôh).<br><em>Tento úsek je bez nutnosti nahrávať fotku a zapisovať do tabuľky.</em></p>
+            <p>Odporúča sa odcvičiť 2-3 cviky na brucho (napr. skracovačky, plank, dvíhanie nôh).</p>
         </div>
         <button class="btn-finish" onclick="finishDay(this)" style="background:var(--color-day3); color:#121212">✅ Ukončiť Deň 3 a uložiť históriu</button>
     </div>
@@ -763,21 +470,17 @@
 
         let currentCalDate = new Date();
 
-        // --- PREKLIKY A NAVIGÁCIA ---
         function scrollToDay(dayNumber) {
             const el = document.getElementById('dayContainer' + dayNumber);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function scrollToRecommendedDay() {
             const lastCompletedDay = parseInt(localStorage.getItem('lastCompletedDay')) || 0;
-            const nextDayIndex = (lastCompletedDay % 3) + 1; // 1, 2, or 3
+            const nextDayIndex = (lastCompletedDay % 3) + 1;
             scrollToDay(nextDayIndex);
         }
 
-        // --- KALENDÁR LOGIKA ---
         function getCalendarLogs() {
             return JSON.parse(localStorage.getItem('workoutCalendarLogs')) || {};
         }
@@ -797,8 +500,7 @@
 
             const year = currentCalDate.getFullYear();
             const month = currentCalDate.getMonth();
-
-            const monthNamesSk = ["Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Oktober", "November", "December"];
+            const monthNamesSk = ["Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"];
             monthTitle.innerText = monthNamesSk[month] + " " + year;
 
             const dayNamesSk = ["Po", "Ut", "St", "Št", "Pi", "So", "Ne"];
@@ -815,8 +517,6 @@
             let startingDay = firstDay.getDay() - 1;
             if (startingDay === -1) startingDay = 6;
 
-            const totalDays = lastDay.getDate();
-
             for (let i = 0; i < startingDay; i++) {
                 const emptyDiv = document.createElement('div');
                 emptyDiv.className = 'cal-day empty';
@@ -826,25 +526,20 @@
             const logs = getCalendarLogs();
             const todayStr = new Date().toISOString().split('T')[0];
 
-            for (let day = 1; day <= totalDays; day++) {
+            for (let day = 1; day <= lastDay.getDate(); day++) {
                 const dayDiv = document.createElement('div');
                 dayDiv.className = 'cal-day';
                 dayDiv.innerText = day;
 
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
 
-                if (dateStr === todayStr) {
-                    dayDiv.classList.add('today');
-                }
+                if (dateStr === todayStr) dayDiv.classList.add('today');
 
                 if (logs[dateStr]) {
                     const dayNum = logs[dateStr];
                     dayDiv.classList.add('day-' + dayNum);
-                    // Preklik priamo z kalendára
-                    dayDiv.title = 'Prejsť na Deň ' + dayNum;
                     dayDiv.onclick = () => scrollToDay(dayNum);
                 }
-
                 grid.appendChild(dayDiv);
             }
         }
@@ -854,7 +549,6 @@
             renderCalendar();
         }
 
-        // --- DASHBOARD AND HIGHLIGHT LOGIKA ---
         function updateNextWorkoutUI() {
             const lastCompletedDay = parseInt(localStorage.getItem('lastCompletedDay')) || 0;
             const bannerText = document.getElementById('recommendedDayText');
@@ -895,7 +589,6 @@
             }
         }
 
-        // --- OBRÁZKY LOGIKA ---
         let db;
         const dbName = "TreningAppDB";
 
@@ -912,12 +605,8 @@
                     db = e.target.result;
                     loadAllImagesFromDB();
                 };
-                request.onerror = function(e) {
-                    loadAllImagesFromDB();
-                };
-            } catch(e) {
-                loadAllImagesFromDB();
-            }
+                request.onerror = function() { loadAllImagesFromDB(); };
+            } catch(e) { loadAllImagesFromDB(); }
         }
 
         function saveImageDB(key, dataUrl) {
@@ -925,9 +614,7 @@
                 try {
                     const tx = db.transaction("images", "readwrite");
                     tx.objectStore("images").put(dataUrl, key);
-                } catch(e) {
-                    localStorage.setItem(key, dataUrl);
-                }
+                } catch(e) { localStorage.setItem(key, dataUrl); }
             } else {
                 try { localStorage.setItem(key, dataUrl); } catch(e) {}
             }
@@ -1037,12 +724,9 @@
             imgElement.style.display = "none";
             btn.style.display = "none";
 
-            if (imgIndex !== -1) {
-                deleteImageDB('trening_img_' + imgIndex);
-            }
+            if (imgIndex !== -1) deleteImageDB('trening_img_' + imgIndex);
         }
 
-        // --- 2. SPRACOVANIE TABULIEK A HISTÓRIE ---
         let workoutData = JSON.parse(localStorage.getItem('workoutDataHistory')) || {};
 
         function initData() {
@@ -1060,12 +744,8 @@
                     const wInput = row.querySelector('.val-weight');
                     const rInput = row.querySelector('.val-reps');
                     
-                    if (wInput) {
-                        wInput.addEventListener('input', (e) => saveCurrent(id, 'w', e.target.value));
-                    }
-                    if (rInput) {
-                        rInput.addEventListener('input', (e) => saveCurrent(id, 'r', e.target.value));
-                    }
+                    if (wInput) wInput.addEventListener('input', (e) => saveCurrent(id, 'w', e.target.value));
+                    if (rInput) rInput.addEventListener('input', (e) => saveCurrent(id, 'r', e.target.value));
                 });
             });
         }
@@ -1102,7 +782,9 @@
         }
 
         function finishDay(btn) {
-            const confirmMsg = 'Naozaj chceš ukončiť tento tréningový deň?\n\nTvoje dnešné hodnoty sa presunú do histórie ("Minule") a zapíšu sa do kalendára.';
+            const confirmMsg = "Naozaj chceš ukončiť tento tréningový deň?
+
+Tvoje dnešné hodnoty sa presunú do histórie ('Minule') a zapíšu sa do kalendára.";
             if (!confirm(confirmMsg)) return;
 
             const dayContainers = Array.from(document.querySelectorAll('.day-container'));
