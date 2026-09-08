@@ -29,9 +29,14 @@ jobs:
           npm init -y
           npm install @capacitor/core@latest @capacitor/cli@latest @capacitor/android@latest
 
+      - name: Príprava webových súborov
+        run: |
+          mkdir -p www
+          cp index.html manifest.json sw.js icon-192.png icon-512.png www/ 2>/dev/null || true
+
       - name: Inicializácia Android projektu
         run: |
-          npx cap init "Môj Tréning" "sk.trening.app" --web-dir .
+          npx cap init "Môj Tréning" "sk.trening.app" --web-dir www
           npx cap add android
           npx cap sync android
 
