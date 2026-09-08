@@ -18,11 +18,11 @@ jobs:
         with:
           node-version: 22
 
-      - name: Nastavenie Java JDK 17
+      - name: Nastavenie Java JDK 21
         uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
 
       - name: Inštalácia Capacitor nástrojov
         run: |
