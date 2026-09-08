@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Signed Android APK
 
 on:
   push:
@@ -16,21 +16,18 @@ jobs:
       - name: Nastavenie Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Nastavenie Java JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Nastavenie Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Inštalácia Capacitor nástrojov
         run: |
           npm init -y
-          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npm install @capacitor/core@latest @capacitor/cli@latest @capacitor/android@latest
 
       - name: Inicializácia Android projektu
         run: |
@@ -38,14 +35,31 @@ jobs:
           npx cap add android
           npx cap sync android
 
-      - name: Zostavenie APK balíčka
+      - name: Generovanie trvalého Keystore súboru
+        env:
+          STORE_PASS: ${{ secrets.KEYSTORE_PASSWORD || 'DefaultPass123' }}
+          KEY_PASS: ${{ secrets.KEY_PASSWORD || 'DefaultPass123' }}
+          ALIAS: ${{ secrets.KEY_ALIAS || 'treningkey' }}
+        run: |
+          keytool -genkey -v -keystore release.keystore -alias $ALIAS -keyalg RSA -keysize 2048 -validity 10000 -storepass $STORE_PASS -keypass $KEY_PASS -dname "CN=TreningApp, OU=Dev, O=App, L=City, S=State, C=SK"
+
+      - name: Zostavenie Release APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleRelease --no-daemon
 
-      - name: Uloženie APK ako artefakt
+      - name: Podpísanie APK pomocou Keystore
+        env:
+          STORE_PASS: ${{ secrets.KEYSTORE_PASSWORD || 'DefaultPass123' }}
+          KEY_PASS: ${{ secrets.KEY_PASSWORD || 'DefaultPass123' }}
+          ALIAS: ${{ secrets.KEY_ALIAS || 'treningkey' }}
+        run: |
+          APK_PATH=$(find android/app/build/outputs/apk/release/ -name "*.apk" | head -n 1)
+          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore release.keystore -storepass $STORE_PASS -keypass $KEY_PASS $APK_PATH $ALIAS
+
+      - name: Uloženie podpísanej APK
         uses: actions/upload-artifact@v4
         with:
-          name: Trening-App-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: Trening-App-Podpisana-APK
+          path: android/app/build/outputs/apk/release/
